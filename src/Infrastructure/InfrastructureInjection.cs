@@ -26,20 +26,23 @@ namespace Infrastructure
                         b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
             }
 
-            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+            services
+                .AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
             services
                 .AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+            // services
+            //     .AddIdentityServer()
+            //     .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
             services.AddTransient<IDateTimeService, DateTimeService>();
             services.AddTransient<IIdentityService, IdentityService>();
 
-            services.AddAuthentication()
-                .AddIdentityServerJwt();
+            // services.AddAuthentication()
+            //     .AddIdentityServerJwt();
+            services.AddAuthentication();
 
             return services;
         }
