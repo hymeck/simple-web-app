@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IQueryable<Infrastructure.Identity.ApplicationUser>
+@{
     ViewBag.Title = "Home";
 }
 
@@ -9,5 +10,35 @@
     </div>
 </form>
 
-<h3>Add Table here</h3>
-@* todo: add table *@
+<div>
+    <div>
+        <div class="table table-striped table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th score="col">ID</th>
+                <th score="col">Username</th>
+                <th score="col">Email</th>
+                <th score="col">Date of registration</th>
+                <th score="col">Last login date</th>
+                <th score="col">Status</th>
+            </tr>
+            </thead>
+            <br/>
+
+            <tbody>
+            @foreach (var u in Model)
+            {
+                <tr>
+                    <td scope="row">@u.Id</td>
+                    <td>@u.UserName</td>
+                    <td>@u.Email</td>
+                    <td>@u.RegisteredAt</td>
+                    <td>@u.GetLastLoginAtString()</td>
+                    <td>@u.GetStatus()</td>
+                </tr>
+            }
+            </tbody>
+
+        </div>
+    </div>
+</div>
