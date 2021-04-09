@@ -13,6 +13,7 @@ namespace WebApp
                 options.Password.RequiredLength = 1;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
             });
             
             return services;
