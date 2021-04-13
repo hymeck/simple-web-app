@@ -1,4 +1,4 @@
-﻿@model IQueryable<Infrastructure.Identity.ApplicationUser>
+﻿@model UserListViewModel
 @{
     ViewBag.Title = "Home";
 }
@@ -12,24 +12,36 @@
 
 <div>
     <div>
-        <div class="table table-striped table-bordered">
+        
+        <div style="margin-top: 10px">
+            <button>block</button>
+            <button><img src="feather-icons/dist/icons/unlock.svg" alt="unlock"></button>
+            <button><img src="feather-icons/dist/icons/trash-2.svg" alt="delete"></button>
+        </div>
+        
+        <table class="table table-striped table-bordered">
             <thead class="thead-dark">
             <tr>
-                <th score="col">ID</th>
-                <th score="col">Username</th>
-                <th score="col">Email</th>
-                <th score="col">Date of registration</th>
-                <th score="col">Last login date</th>
-                <th score="col">Status</th>
+                <th score="col">
+                    <input type="checkbox"/> 
+                    (un)block all
+                </th>
+                <th score="col">id</th>
+                <th score="col">username</th>
+                <th score="col">email</th>
+                <th score="col">registration date</th>
+                <th score="col">last login date</th>
+                <th score="col">status</th>
             </tr>
             </thead>
             <br/>
 
             <tbody>
-            @foreach (var u in Model)
+            @foreach (var u in Model.Users)
             {
                 <tr>
-                    <td scope="row">@u.Id</td>
+                    <td style="text-align: center"> <input type="checkbox" /> </td>
+                    <td>@u.Id</td>
                     <td>@u.UserName</td>
                     <td>@u.Email</td>
                     <td>@u.RegisteredAt</td>
@@ -39,6 +51,6 @@
             }
             </tbody>
 
-        </div>
+        </table>
     </div>
 </div>

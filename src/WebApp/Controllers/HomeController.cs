@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.ViewModels.User;
 
 namespace WebApp.Controllers
 {
@@ -15,6 +16,6 @@ namespace WebApp.Controllers
             this.userManager = userManager;
         }
 
-        public IActionResult Index() => View(userManager.Users);
+        public IActionResult Index() => View(new UserListViewModel(userManager.Users, null));
     }
 }

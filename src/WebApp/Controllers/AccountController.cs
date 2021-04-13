@@ -52,8 +52,7 @@ namespace WebApp.Controllers
                 UserName = model.Username, 
                 Email = model.Email, 
                 RegisteredAt = dateTimeService.Now,
-                LastLoginAt = null,
-                LockoutEnabled = false
+                LastLoginAt = null
             };
             var result = await userManager.CreateAsync(user, model.Password);
 
