@@ -76,7 +76,7 @@ namespace Infrastructure.Identity
         {
             if (user != null)
             {
-                user.LockoutEnabled = lockoutEnabled;
+                user.IsActive = lockoutEnabled;
                 return await UpdateUserAsync(user);
             }
             

@@ -82,13 +82,27 @@ namespace WebApp.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid input");
                 return View(model);
             }
+
+            var user = await userManager.FindByNameAsync(model.Username);
+            
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "No such user");
+                return View(model);
+            }
+
+            if (!user.IsActive)
+            {
+                ModelState.AddModelError(string.Empty, "You are blocked");
+                return View(model);
+            }
             
             var result =
                 await signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
 
             if (result.Succeeded)
             {
-                var user = await userManager.FindByNameAsync(model.Username);
+                // var user = await userManager.FindByNameAsync(model.Username);
                 user.LastLoginAt = dateTimeService.Now;
                 await userManager.UpdateAsync(user);
                 return RedirectToAction("Index", "Home");
