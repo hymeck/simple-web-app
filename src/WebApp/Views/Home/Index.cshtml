@@ -12,45 +12,52 @@
 
 <div>
     <div>
-        
-        <div style="margin-top: 10px">
-            <button>block</button>
-            <button><img src="feather-icons/dist/icons/unlock.svg" alt="unlock"></button>
-            <button><img src="feather-icons/dist/icons/trash-2.svg" alt="delete"></button>
-        </div>
-        
-        <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
-            <tr>
-                <th score="col">
-                    <input type="checkbox"/> 
-                    (un)block all
-                </th>
-                <th score="col">id</th>
-                <th score="col">username</th>
-                <th score="col">email</th>
-                <th score="col">registration date</th>
-                <th score="col">last login date</th>
-                <th score="col">status</th>
-            </tr>
-            </thead>
-            <br/>
+        <form method="post" asp-controller="Home" asp-action="Action">
+            <div style="margin-top: 10px">
+                <button type="submit" value="block" name="block">block</button>
+                <button type="submit" value="unlock" name="unlock">
+                    <img src="feather-icons/dist/icons/unlock.svg" alt="unlock">
+                </button>
+                <button type="submit" value="delete" name="delete">
+                    <img src="feather-icons/dist/icons/trash-2.svg" alt="delete">
+                </button>
+            </div>
 
-            <tbody>
-            @foreach (var u in Model.Users)
-            {
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
                 <tr>
-                    <td style="text-align: center"> <input type="checkbox" /> </td>
-                    <td>@u.Id</td>
-                    <td>@u.UserName</td>
-                    <td>@u.Email</td>
-                    <td>@u.RegisteredAt</td>
-                    <td>@u.GetLastLoginAtString()</td>
-                    <td>@u.GetStatus()</td>
+                    <th score="col">
+                        <input type="checkbox"/>
+                        (un)block all
+                    </th>
+                    <th score="col">id</th>
+                    <th score="col">username</th>
+                    <th score="col">email</th>
+                    <th score="col">registration date</th>
+                    <th score="col">last login date</th>
+                    <th score="col">status</th>
                 </tr>
-            }
-            </tbody>
+                </thead>
+                <br/>
 
-        </table>
+                <tbody>
+                @foreach (var u in Model.Users)
+                {
+                    <tr>
+                        <td style="text-align: center">
+                            <input type="checkbox" id="@u.Id" name="checkboxes" value="@u.Id"/>
+                        </td>
+                        <td>@u.Id</td>
+                        <td>@u.UserName</td>
+                        <td>@u.Email</td>
+                        <td>@u.RegisteredAt</td>
+                        <td>@u.GetLastLoginAtString()</td>
+                        <td>@u.GetStatus()</td>
+                    </tr>
+                }
+                </tbody>
+
+            </table>
+        </form>
     </div>
 </div>
