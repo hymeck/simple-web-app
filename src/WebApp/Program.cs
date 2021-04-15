@@ -42,6 +42,14 @@ namespace WebApp
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    if (!IsDevelopment)
+                    {
+                        var port = Environment.GetEnvironmentVariable("PORT");
+                        webBuilder.UseUrls("http://*:" + port);
+                    }
                 });
+        
+        public static bool IsDevelopment => Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
+
     }
 }
