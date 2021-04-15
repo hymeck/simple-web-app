@@ -40,7 +40,8 @@ namespace Infrastructure
             if (env.IsProduction()) // heroku provides postgree sql db
             {
                 var conn = GetHerokuConnectionString();
-                s.AddDbContext<ApplicationDbContext>(o => o.UseNpgsql(conn));
+                s.AddDbContext<ApplicationDbContext>(o => o.UseNpgsql(conn,
+                    b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
             }
 
             else
