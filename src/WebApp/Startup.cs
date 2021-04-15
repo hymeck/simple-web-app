@@ -12,17 +12,19 @@ namespace WebApp
     public class Startup
     {
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Env { get; }
         
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            Env = env;
         }
         
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddInfrastructure(Configuration);
+            services.AddInfrastructure(Configuration, Env);
 
             services.AddPasswordPolicy();
             
